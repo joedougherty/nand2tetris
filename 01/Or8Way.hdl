@@ -12,5 +12,16 @@ CHIP Or8Way {
     OUT out;
 
     PARTS:
-    // Put your code here.
+    // Outermost "layer"
+    Or(left=in[0], right=in[1], out=out1);
+    Or(left=in[2], right=in[3], out=out2);
+    Or(left=in[4], right=in[5], out=out3);
+    Or(left=in[6], right=in[7], out=out4);
+
+    // Funnel of Truth
+    Or(left=out1, right=out2, out=out5);
+    Or(left=out3, right=out4, out=out6);
+
+    // FINAL JUSTICE
+    Or(left=out5, right=out6, out=out);
 }
