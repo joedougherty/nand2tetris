@@ -11,11 +11,17 @@
  *                     {0,0,0,0,0,0,0,in} if sel == 111
  */
 
-
 CHIP DMux8Way {
     IN in, sel[3];
     OUT a, b, c, d, e, f, g, h;
 
     PARTS:
     // Put your code here.
+    Not(in=sel[2], out=notsel1);
+
+    And(a=notsel1, b=in, out=topin);
+    And(a=sel[2], b=in, out=bottomin);
+
+    DMux4Way(in=topin, sel[0]=sel[0], sel[1]=sel[1], a=a, b=b, c=c, d=d);
+    DMux4Way(in=bottomin, sel[0]=sel[0], sel[1]=sel[1], a=e, b=f, c=g, d=h);
 }
